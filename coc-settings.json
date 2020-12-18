@@ -1,0 +1,21 @@
+{
+    "languageserver": {
+    "golang": {
+      "command": "gopls",
+       "args": ["serve", "-debug", "0.0.0.0:8484", "-rpc.trace"],
+      "filetypes": ["go"],
+      "trace.server": "verbose",
+      "initializationOptions": {
+          "usePlaceholders":true,
+          "completeUnimported":true
+      }
+    },
+     "dockerfile": {
+      "command": "docker-langserver",
+      "filetypes": ["dockerfile"],
+      "args": ["--stdio"]
+    }
+    },
+    "yaml.schemas": {
+    "kubernetes": "/*.yaml"}
+}
