@@ -1,6 +1,6 @@
 [user]
 	name = karthick
-    email = a.karthie+github@pm.me
+    email = a.karthie+github@gmail.com
     username = ehrktia
 [credential]
 	helper = store --file ~/.git-credentials-personal
@@ -27,7 +27,7 @@
 	changed = yellow bold
 	untracked = red bold
 [diff]
-	tool = vimdiff
+	tool = nvimdiff
 [difftool]
 	prompt = false
 [gitflow "prefix"]

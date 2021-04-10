@@ -10,7 +10,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="agnoster"
+ZSH_THEME="robbyrussell"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -63,19 +63,21 @@ ZSH_THEME="agnoster"
  HIST_STAMPS="yyyy-mm-dd"
 
 # Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
 
 # Which plugins would you like to load?
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions)
+plugins=(git golang zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
- export MANPATH="/usr/local/man:$MANPATH"
+unset MANPATH
+MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 
 # You may need to manually set your language environment
  export LANG=en_GB.UTF-8
@@ -86,12 +88,13 @@ source $ZSH/oh-my-zsh.sh
  else
    export EDITOR='vim'
  fi
-
 # Compilation flags
  export ARCHFLAGS="-arch x86_64"
 #Path settings
-export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin:$HOME/.cargo/bin:$HOME/.rustup
-export PATH=$PATH:/$HOME/Library/Python/3.8/bin
+NPM_PACKAGES="$HOME/.npm-packages"
+prefix=${HOME}/.npm-packages
+NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
+export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin:$HOME/.cargo/bin:$HOME/.rustup:$HOME/nvim/bin/nvim:$HOME/Applications/Postman:$NPM_PACKAGES
 export GOPATH=$HOME/go
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -109,3 +112,21 @@ alias -g dps='docker container ps -a'
 # work.
 [ -f ~/kubectl-aliases/.kubectl_aliases ] && source ~/kubectl-aliases/.kubectl_aliases
 export PATH="/usr/local/opt/icu4c/sbin:$PATH"
+[ -f ~/.kubectl_aliases ] && source ~/.kubectl_aliases
+
+#custom alias
+alias lah='la -h'
+alias la='ls -lart'
+alias gtc='go test -v -race -coverprofile ./...'
+alias gtr='go test -v -run'
+export HELM_EXPERIMENTAL_OCI=1
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/karthickayyapillai/gcloud/google-cloud-sdk/path.zsh.inc' ]; then . '/home/karthickayyapillai/gcloud/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/karthickayyapillai/gcloud/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/karthickayyapillai/gcloud/google-cloud-sdk/completion.zsh.inc'; fi
+
+# fnm
+export PATH=/home/karthickayyapillai/.fnm:$PATH
+eval "`fnm env`"
