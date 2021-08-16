@@ -10,7 +10,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+ZSH_THEME="awesomepanda"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -94,7 +94,7 @@ MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 NPM_PACKAGES="$HOME/.npm-packages"
 prefix=${HOME}/.npm-packages
 NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
-export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin:$HOME/.cargo/bin:$HOME/.rustup:$HOME/nvim/bin/nvim:$HOME/Applications/Postman:$NPM_PACKAGES
+export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin:$HOME/.cargo/bin:$HOME/.rustup:$HOME/nvim/bin/nvim:$HOME/Applications/Postman:$NPM_PACKAGES:$HOME/lua-5.4.3/src:$PATH
 export GOPATH=$HOME/go
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -118,8 +118,12 @@ export PATH="/usr/local/opt/icu4c/sbin:$PATH"
 alias lah='la -h'
 alias la='ls -lart'
 alias gtc='go test -v -race -coverprofile ./...'
-alias gtr='go test -v -run'
+alias gtr='go test -v -run .'
 export HELM_EXPERIMENTAL_OCI=1
+export PGADMIN_DEFAULT_USERNAME=a.karthie@gmail.com
+export PGADMIN_DEFAULT_PASSWORD=adminstrator
+export PGADMIN_PORT=5555
+
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/home/karthickayyapillai/gcloud/google-cloud-sdk/path.zsh.inc' ]; then . '/home/karthickayyapillai/gcloud/google-cloud-sdk/path.zsh.inc'; fi
@@ -130,3 +134,4 @@ if [ -f '/home/karthickayyapillai/gcloud/google-cloud-sdk/completion.zsh.inc' ];
 # fnm
 export PATH=/home/karthickayyapillai/.fnm:$PATH
 eval "`fnm env`"
+

@@ -7,7 +7,8 @@ set path+=**
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 let g:indentLine_char = '⦙'
 let g:loaded_python_provider = 0
-let g:python3_host_prog = '/usr/bin/python3.8'
+let g:python3_host_prog = '/usr/bin/python3.9'
+let g:loaded_ruby_provider = 0
 set autowrite
 set autoread
 set autoindent
@@ -101,6 +102,7 @@ Plug '$HOME/.fzf'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sebdah/vim-delve'
+"Plug 'neovim/nvim-lspconfig'
 Plug 'davidosomething/vim-colors-meh'
 Plug 'sheerun/vim-polyglot'
 Plug 'Yggdroot/indentLine'
@@ -297,8 +299,8 @@ nnoremap - ddp
 nnoremap <Leader>gd :Gdiffsplit<cr>
 "visual mode mapping to wrap text "
 "start terminal in vert and split mode"
-:nmap <Leader>t  :new term://zsh
-:nmap <Leader>vt  :vnew term://zsh
+:nmap <Leader>t  :new term://fish
+:nmap <Leader>vt  :vnew term://fish
 nnoremap <Leader>ev :e $MYVIMRC<CR>
 nnoremap <Leader>sa :wa<CR>
 "list all buffers"
@@ -338,5 +340,5 @@ nnoremap <Leader>fo zfa{
 "delve go debug"
 let g:delve_backend = "native"
 syntax on
-colorscheme gruvbox-material
+colorscheme gruvbox
 set background=dark

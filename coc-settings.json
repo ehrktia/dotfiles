@@ -14,7 +14,12 @@
       "command": "docker-langserver",
       "filetypes": ["dockerfile"],
       "args": ["--stdio"]
-    }
+    },
+    "bash": {
+    "command": "bash-language-server",
+    "args": ["start"],
+    "filetypes": ["sh"]
+  }
     },
     "yaml.schemas": {
     "kubernetes": "/*.yaml"
