@@ -36,3 +36,5 @@
 	rebase = true
 [page]
 	color = true
+[commit]
+	gpgsign = true
