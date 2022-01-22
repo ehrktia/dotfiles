@@ -1,1 +1,0 @@
-/home/karthickayyapillai/.fzf/shell/key-bindings.fish
