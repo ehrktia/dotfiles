@@ -7,4 +7,4 @@ personal and work related dot files for setup
 
 ## Todo
 
-- [ ] allocate individual branches for work and personal
+- [x ] allocate individual branches for work and personal
