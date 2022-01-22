@@ -1,1 +1,0 @@
-/Users/karthickayyapillai/.config/fish/
