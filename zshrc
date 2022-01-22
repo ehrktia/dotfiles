@@ -1,7 +1,7 @@
 # If you come from bash you might have to change your $PATH.
  ZSH_CUSTOM="$HOME/.oh-my-zsh/custom"
 ZSH_DISABLE_COMPFIX=true
- export PATH=$HOME/bin:/usr/local/bin:$PATH
+ export PATH=$HOME/bin:/usr/local/bin:$HOME/.pyenv:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -10,7 +10,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="awesomepanda"
+ZSH_THEME="robbyrussell"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -69,7 +69,7 @@ ZSH_THEME="awesomepanda"
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
+# Add wisely, as too many plugins slowdown shell startup.
 plugins=(git golang zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
@@ -94,7 +94,7 @@ MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 NPM_PACKAGES="$HOME/.npm-packages"
 prefix=${HOME}/.npm-packages
 NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
-export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin:$HOME/.cargo/bin:$HOME/.rustup:$HOME/nvim/bin/nvim:$HOME/Applications/Postman:$NPM_PACKAGES:$HOME/lua-5.4.3/src:$PATH
+export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin:$HOME/.cargo/bin:$HOME/.rustup:$HOME/nvim/bin/nvim:$HOME/Applications/Postman:$NPM_PACKAGES
 export GOPATH=$HOME/go
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -118,12 +118,10 @@ export PATH="/usr/local/opt/icu4c/sbin:$PATH"
 alias lah='la -h'
 alias la='ls -lart'
 alias gtc='go test -v -race -coverprofile ./...'
-alias gtr='go test -v -run .'
+alias gtr='go test -v -run'
+# env vars
 export HELM_EXPERIMENTAL_OCI=1
-export PGADMIN_DEFAULT_USERNAME=a.karthie@gmail.com
-export PGADMIN_DEFAULT_PASSWORD=adminstrator
-export PGADMIN_PORT=5555
-
+export SCRIPT_FEATURE_FLAG_PYTHON=1
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/home/karthickayyapillai/gcloud/google-cloud-sdk/path.zsh.inc' ]; then . '/home/karthickayyapillai/gcloud/google-cloud-sdk/path.zsh.inc'; fi
@@ -135,3 +133,15 @@ if [ -f '/home/karthickayyapillai/gcloud/google-cloud-sdk/completion.zsh.inc' ];
 export PATH=/home/karthickayyapillai/.fnm:$PATH
 eval "`fnm env`"
 
+# fnm
+export PATH=/Users/karthickayyapillai/.fnm:$PATH
+eval "`fnm env`"
+eval "$(direnv hook zsh)"
+eval "$(pyenv init --path)"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
+
+source /Users/karthickayyapillai/.config/broot/launcher/bash/br

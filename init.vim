@@ -7,15 +7,13 @@ set path+=**
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 let g:indentLine_char = '⦙'
 let g:loaded_python_provider = 0
-let g:python3_host_prog = '/usr/bin/python3.9'
-let g:loaded_ruby_provider = 0
+let g:python3_host_prog = '/usr/local/bin/python3'
 set autowrite
 set autoread
 set autoindent
 set textwidth=80
 set undofile
 set undolevels=10000
-set backup
 set smartindent
 set spell
 set smartcase
@@ -49,11 +47,9 @@ set hlsearch
 let g:gruvbox_material_background = 'soft'
 set spell
 set directory=$HOME/.config/nvim/swap//
-set backupdir=$HOME/.config/nvim/backup//
 set undodir=$HOME/.config/nvim/undo//
-set writebackup
+set backupdir=$HOME/.config/nvim/backup//
 set cursorline
-set backupcopy=yes
 set ruler
 set cmdheight=2
 set updatetime=300
@@ -102,7 +98,6 @@ Plug '$HOME/.fzf'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sebdah/vim-delve'
-"Plug 'neovim/nvim-lspconfig'
 Plug 'davidosomething/vim-colors-meh'
 Plug 'sheerun/vim-polyglot'
 Plug 'Yggdroot/indentLine'
@@ -328,6 +323,11 @@ endif
 "This turns off Vim's crazy default regex characters and makes searches use normal regexes.
 nnoremap / /\v
 vnoremap / /\v
+"ripgrep integration to grep"
+if executable("rg")
+  set grepprg=rg\ --vimgrep\ --smart-case\ --hidden
+  set grepformat=%f:%l:%c:%m
+endif
 "force quit the file"
 nnoremap <Leader>qa :q!<cr>
 "colorscheme works only if placed at end of init.vim"
@@ -340,5 +340,5 @@ nnoremap <Leader>fo zfa{
 "delve go debug"
 let g:delve_backend = "native"
 syntax on
-colorscheme gruvbox
+colorscheme gruvbox-material
 set background=dark
