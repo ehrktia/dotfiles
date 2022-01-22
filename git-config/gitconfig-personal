@@ -43,5 +43,5 @@
 	tool = nvim
 [mergetool]
 	prompt = false
-[url "git@github.com:"]
+[url "git@github.com-personal:"]
 	insteadOf = https://github.com
