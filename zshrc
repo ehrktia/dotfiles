@@ -135,3 +135,6 @@ if [ -f '/home/karthickayyapillai/gcloud/google-cloud-sdk/completion.zsh.inc' ];
 export PATH=/home/karthickayyapillai/.fnm:$PATH
 eval "`fnm env`"
 
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/bin/terraform terraform

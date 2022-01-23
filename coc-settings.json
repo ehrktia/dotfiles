@@ -7,7 +7,8 @@
       "trace.server": "verbose",
       "initializationOptions": {
           "usePlaceholders":true,
-          "completeUnimported":true
+          "completeUnimported":true,
+          "experimentalWorkspaceModule":true
       }
     },
      "dockerfile": {
@@ -15,13 +16,15 @@
       "filetypes": ["dockerfile"],
       "args": ["--stdio"]
     },
-    "bash": {
+    "terraform": {
+      "command": "terraform-lsp",
+      "filetypes": ["terraform"],
+      "initializationOptions": {}
+    },
+  "bash": {
     "command": "bash-language-server",
     "args": ["start"],
     "filetypes": ["sh"]
   }
-    },
-    "yaml.schemas": {
-    "kubernetes": "/*.yaml"
-    }
+}
 }

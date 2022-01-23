@@ -49,8 +49,8 @@ set hlsearch
 let g:gruvbox_material_background = 'soft'
 set spell
 set directory=$HOME/.config/nvim/swap//
-set backupdir=$HOME/.config/nvim/backup//
 set undodir=$HOME/.config/nvim/undo//
+set backupdir=$HOME/.config/nvim/backup//
 set writebackup
 set cursorline
 set backupcopy=yes
@@ -102,7 +102,6 @@ Plug '$HOME/.fzf'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sebdah/vim-delve'
-"Plug 'neovim/nvim-lspconfig'
 Plug 'davidosomething/vim-colors-meh'
 Plug 'sheerun/vim-polyglot'
 Plug 'Yggdroot/indentLine'
@@ -328,6 +327,11 @@ endif
 "This turns off Vim's crazy default regex characters and makes searches use normal regexes.
 nnoremap / /\v
 vnoremap / /\v
+"ripgrep integration to grep"
+if executable("rg")
+  set grepprg=rg\ --vimgrep\ --smart-case\ --hidden
+  set grepformat=%f:%l:%c:%m
+endif
 "force quit the file"
 nnoremap <Leader>qa :q!<cr>
 "colorscheme works only if placed at end of init.vim"
