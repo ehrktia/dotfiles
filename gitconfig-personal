@@ -1,14 +1,12 @@
 [user]
-	signingkey = BDC57B44BCC757B2
 	name = karthick
-    email = a.karthie@gmail.com
+    email = a.karthie+github@gmail.com
     username = ehrktia
-[credential]
-	helper = store --file ~/.git-credentials-personal
+	signingkey = BDC57B44BCC757B2
 [core]
 	editor = nvim
     whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
-	excludesfile = ~/.gitignore
+	excludesFile = ~/.gitignore
 [push]
 	default = current
 [color]
@@ -39,3 +37,11 @@
 	color = true
 [commit]
 	gpgsign = true
+[mergetool "nvim"]
+	cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+[merge]
+	tool = nvim
+[mergetool]
+	prompt = false
+[url "git@github.com:"]
+	insteadOf = https://github.com
