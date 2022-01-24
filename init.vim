@@ -275,8 +275,8 @@ nnoremap <Leader><c-u> <esc>gUaw
 "mapping to save file "
 nnoremap <Leader>s :wa<cr>
 "edit and source vimrc"
-nnoremap <Leader>ev :vsp<cr>:e ~/dotfiles/init.vim<CR>
-nnoremap <Leader>sv  :source ~/.config/nvim/init.vim<CR>
+nnoremap <Leader>ev :vsp<cr>:e $HOME/dotfiles/init.vim<CR>
+nnoremap <Leader>sv  :source $HOME/config/nvim/init.vim<CR>
 "remove highlight in search"
 nnoremap <Leader>nh :nohl<cr>
 "mapping to surround a word with double quotes"
