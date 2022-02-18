@@ -40,12 +40,6 @@ set incsearch
 set wildignore=*.o,*.obj,*.bak,*.dmg
 set ignorecase
 set hlsearch
-""set t_Co=256
-"cosmetics"
-""set background=dark
-"if has('termguicolors')
-"set termguicolors
-"endif
 let g:gruvbox_material_background = 'soft'
 set spell
 set directory=$HOME/.config/nvim/swap//
@@ -174,6 +168,13 @@ tmap <Esc> <C-\><C-n>
 "au BufNewFile,BufRead *.yaml,*.yml so ~/.vim/yaml.vim
 let g:coc_snippet_next = '<tab>'
 " Mappings using CoCList:
+" using global extensions
+ let g:coc_global_extensions = [
+ \ 'coc-snippets',
+ \ 'coc-prettier',
+ \ 'coc-markdownlint',
+ \'coc-yaml',
+ \ ]
 " Show all diagnostics.
 nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
 " Manage extensions.
@@ -193,16 +194,6 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 """ Use tab for trigger completion with characters ahead and navigate.
 """ NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 """ other plugin before putting this into your config.
-inoremap <silent><expr> <TAB>
-            \ pumvisible() ? "\<C-n>" :
-            \ <SID>check_back_space() ? "\<TAB>" :
-            \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
 "make tab to expand snippets"
 inoremap <silent><expr> <TAB>
              \ pumvisible() ? coc#_select_confirm() :
@@ -239,10 +230,12 @@ let g:fzf_history_dir = '~/.config/nvim/fzf-history'
  endfunction
 augroup mygroup
   autocmd!
+  autocmd CursorHold * silent call CocActionAsync('highlight')
+  "format mapping
+  nmap <leader>f <Plug>(coc-format-selected)
 " Applying codeAction to the selected region.
 " Example: `<leader>aap` for current paragraph
-map <leader>a  <Plug>(coc-codeaction-selected)
-" Remap keys for applying codeAction to the current line.
+nmap <leader>a  <Plug>(coc-codeaction-selectted)
 nmap <leader>ac  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf  <Plug>(coc-fix-current)
