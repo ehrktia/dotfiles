@@ -1,95 +1,16 @@
-set encoding=utf-8
-set nocompatible
-filetype indent plugin on
-syntax on
-set runtimepath+=$HOME/.config/nvim/colors
-set path+=**
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-let g:indentLine_char = '⦙'
-let g:loaded_python_provider = 0
-let g:python3_host_prog = '/usr/local/bin/python3'
-set autowrite
-set autoread
-set autoindent
-set textwidth=80
-set undofile
-set undolevels=10000
-set smartindent
-set spell
-set smartcase
-set noshowmode
-set clipboard=unnamedplus
-set tabstop=2
-set tabline=2
-set shiftwidth=2
-set expandtab
-set smarttab
-" Make the keyboard faaaaaaast
-set ttyfast
-set timeout timeoutlen=1000 ttimeoutlen=50
-set ai "Auto indent
-set si "Smart indent
-set wrap "Wrap lines
-set number relativenumber
-set path+=**
-set wildmenu
-set nrformats=
-set incsearch
-set wildignore=*.o,*.obj,*.bak,*.dmg
-set ignorecase
-set hlsearch
-""set t_Co=256
-"cosmetics"
-""set background=dark
-"if has('termguicolors')
-"set termguicolors
-"endif
-let g:gruvbox_material_background = 'soft'
-set spell
-set directory=$HOME/.config/nvim/swap//
-set undodir=$HOME/.config/nvim/undo//
-set backupdir=$HOME/.config/nvim/backup//
-set cursorline
-set ruler
-set cmdheight=2
-set updatetime=300
-set shortmess+=c
 "to comment json file"
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
-set foldlevelstart=20
 autocmd FileType json syntax match Comment +\/\/.\+$+
-set magic
-" Show matching brackets when text indicator is over them
-set showmatch
 " Return to last edit position when opening files (You want this!)
 autocmd BufReadPost *
             \ if line("'\"") > 0 && line("'\"") <= line("$") |
             \   exe "normal! g`\"" |
             \ endif
 " Remember info about open buffers on close
-set viminfo^=%
-" Remap VIM 0 to first non-blank character
-map 0 ^
-" Breaking lines with \[enter] without having to go to insert mode (myself).
-nmap <leader><cr> i<cr><Esc>
-set signcolumn=yes
-set bs=2
-set tw=80
-set colorcolumn=80
+""set viminfo^=%
 highlight ColorColumn ctermbg=233
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set shiftround
-set expandtab
-set laststatus=2
-set foldlevelstart=20
 autocmd StdinReadPre * let s:std_in=1
-""reselect visual block for indent
-vnoremap < <gv
-vnoremap > >gv
-let $FZF_DEFAULT_COMMAND = 'ag -g ""'
-let g:indentLine_char = '⦙'
+""let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 autocmd StdinReadPre * let s:std_in=1
 "list of plugins used"
@@ -135,34 +56,6 @@ let g:lightline = {
       \   'gitbranch': 'FugitiveHead'
       \ },
       \ }
-:let mapleader = ","
-"mapping to open dynamic tagbar toggle"
-nmap <F8> :TagbarToggle<CR>
-"nerdtree mappings"
-"allows NERDTree to open/close by typing nt
-map nt :NERDTreeToggle<CR>
-"use leader q to close the window - general purpose"
-:nmap <Leader>q :q<CR>
-:nmap <Leader>nh :nohl<CR>
-"nerdcommenter settings"
-let g:NERDSpaceDelims = 1
-let g:NERDCommentEmptyLines = 1
-let g:NERDTrimTrailingWhitespace = 1
-"auto close quotes and braces"
-inoremap " ""<left>
-inoremap ' ''<left>
-inoremap ( ()<left>
-inoremap [ []<left>
-inoremap { {}<left>
-inoremap {<CR> {<CR>}<ESC>O
-inoremap {;<CR> {<CR>};<ESC>O
-"del empty lines
-:nmap <Leader>o  :FZF<CR>
-""split navigations
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
 tmap <Esc> <C-\><C-n>
 
 "navigate between terminal emulator and windows"
@@ -217,7 +110,6 @@ inoremap <A-k> <Esc>:m .-2<CR>==gi
 vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
 
-let g:gitgutterenable=1
 " GoTo code navigation.
  nmap <silent> gd <Plug>(coc-definition)
  nmap <silent> gy <Plug>(coc-type-definition)
@@ -250,64 +142,6 @@ augroup end
 " Markdown and Journal
 autocmd FileType markdown setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType journal setlocal shiftwidth=2 tabstop=2 softtabstop=2
-""split navigations
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
-"tab navigation for buffers"
-nmap <Tab> :bnext<CR>
-"use shift tab to go prev buffer"
-nmap <S-Tab> :bprevious<CR>
-"custom key mappings - Learning"
-"come out of ins Mode Using Below Keys"
-inoremap jk <esc>
-"mapping to captialize first letter of word -go naming conventions"
-inoremap <c-u> <esc>viwb~ea
-nnoremap <c-u> <esc>viwb~ea
-"captialize entire word"
-inoremap <Leader><c-u> <esc>gUawea
-nnoremap <Leader><c-u> <esc>gUaw
-"mapping to save file "
-nnoremap <Leader>s :wa<cr>
-"edit and source vimrc"
-nnoremap <Leader>ev :vsp<cr>:e ~/dotfiles/init.vim<CR>
-nnoremap <Leader>sv  :source ~/.config/nvim/init.vim<CR>
-"remove highlight in search"
-nnoremap <Leader>nh :nohl<cr>
-"mapping to surround a word with double quotes"
-nnoremap <Leader>" <esc>viw<esc>a"<esc>bi"<esc>lel
-"mapping to surround word with braces- go multiple returns"
-nnoremap <Leader>) <esc>viw<esc>a)<esc>bi(<esc>lel
-"quit file"
-nnoremap <Leader>q :q<cr>
-"redo buffers"
-nnoremap <Leader>e :bufdo e<cr>
-nnoremap <Leader>bd :bufdo bd<cr>
-"save file
-nnoremap <Leader>s :w<cr>
-"move a sentence up"
-nnoremap _ ddkP
-"move a sentence down"
-nnoremap - ddp
-"git diff split"
-nnoremap <Leader>gd :Gdiffsplit<cr>
-"visual mode mapping to wrap text "
-"start terminal in vert and split mode"
-:nmap <Leader>t  :new term://fish
-:nmap <Leader>vt  :vnew term://fish
-nnoremap <Leader>ev :e $MYVIMRC<CR>
-nnoremap <Leader>sa :wa<CR>
-"list all buffers"
-nnoremap <Leader>bl :ls<cr>
-"open a vsplit with same file"
-nnoremap <Leader>v :vsp<cr>
-"open split with same file"
-nnoremap <Leader>sp :sp<cr>
-"print file name below status"
-nnoremap <Leader>fn  :echo  @%<cr>
-" git diff split"
- nnoremap <Leader>gs :Gdiffsplit<cr>
 " Delete trailing white space on save, useful for some filetypes ;)
 fun! CleanExtraSpaces()
     let save_cursor = getpos(".")
@@ -321,24 +155,16 @@ if has("autocmd")
     autocmd BufWritePre *.txt,*.js,*.py,*.wiki,*.sh,*.coffee,*.go,*.vim :call CleanExtraSpaces()
 endif
 "This turns off Vim's crazy default regex characters and makes searches use normal regexes.
-nnoremap / /\v
-vnoremap / /\v
+""nnoremap / /\v
+""vnoremap / /\v
 "ripgrep integration to grep"
 if executable("rg")
   set grepprg=rg\ --vimgrep\ --smart-case\ --hidden
   set grepformat=%f:%l:%c:%m
 endif
-"force quit the file"
-nnoremap <Leader>qa :q!<cr>
-"colorscheme works only if placed at end of init.vim"
-let g:impact_transbg=1
-""colorscheme gruvbox-material
-""colorscheme onedark
-""colorscheme humanoid
-"folds"
-nnoremap <Leader>fo zfa{
 "delve go debug"
-let g:delve_backend = "native"
-syntax on
-colorscheme gruvbox-material
-set background=dark
+""let g:delve_backend = "native"
+lua require ('basic')
+lua require ('map')
+lua require ('command')
+lua require ('custom')
