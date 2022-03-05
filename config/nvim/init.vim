@@ -1,8 +1,7 @@
 set encoding=utf-8
-set nocompatible
 filetype indent plugin on
 syntax on
-set runtimepath+=$HOME/.config/nvim/colors
+set runtimepath+=$HOME/usr/bin/rg
 set path+=**
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 let g:indentLine_char = '⦙'
@@ -86,7 +85,7 @@ autocmd StdinReadPre * let s:std_in=1
 ""reselect visual block for indent
 vnoremap < <gv
 vnoremap > >gv
-let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+""let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
 let g:indentLine_char = '⦙'
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 autocmd StdinReadPre * let s:std_in=1
@@ -114,14 +113,12 @@ Plug 'junegunn/vim-easy-align'
 Plug 'mrk21/yaml-vim'
 Plug 'morhetz/gruvbox'
 Plug 'joshdick/onedark.vim'
-Plug 'junegunn/fzf'
 Plug 'frazrepo/vim-rainbow'
 Plug 'pedrohdz/vim-yaml-folds'
 Plug 'uarun/vim-protobuf'
 Plug 'Yggdroot/indentLine'
 call plug#end()
 "disable ultisnips"
-let g:UltiSnipsExpandTrigger = "<nop>"
 "lightline buffer plugin"
 let g:lightline = {
       \ 'colorscheme': 'wombat',
@@ -172,9 +169,12 @@ let g:coc_snippet_next = '<tab>'
  let g:coc_global_extensions = [
  \ 'coc-snippets',
  \ 'coc-prettier',
+ \ 'coc-go',
  \ 'coc-markdownlint',
  \'coc-yaml',
  \ ]
+" Add `:Format` command to format current buffer.
+command! -nargs=0 Format :call CocActionAsync('format')
 " Show all diagnostics.
 nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
 " Manage extensions.
@@ -191,6 +191,8 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 """ Resume latest coc list.
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+  "format mapping
+  nnoremap <space>f :Format<CR>
 """ Use tab for trigger completion with characters ahead and navigate.
 """ NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 """ other plugin before putting this into your config.
@@ -231,8 +233,6 @@ let g:fzf_history_dir = '~/.config/nvim/fzf-history'
 augroup mygroup
   autocmd!
   autocmd CursorHold * silent call CocActionAsync('highlight')
-  "format mapping
-  nmap <leader>f <Plug>(coc-format-selected)
 " Applying codeAction to the selected region.
 " Example: `<leader>aap` for current paragraph
 nmap <leader>a  <Plug>(coc-codeaction-selectted)
@@ -240,7 +240,7 @@ nmap <leader>ac  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf  <Plug>(coc-fix-current)
   " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  autocmd FileType typescript,json,go setl formatexpr=CocAction('formatSelected')
   " Update signature help on jump placeholder.
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
@@ -268,8 +268,8 @@ nnoremap <Leader><c-u> <esc>gUaw
 "mapping to save file "
 nnoremap <Leader>s :wa<cr>
 "edit and source vimrc"
-nnoremap <Leader>ev :vsp<cr>:e $HOME/dotfiles/init.vim<CR>
-nnoremap <Leader>sv  :source $HOME/config/nvim/init.vim<CR>
+nnoremap <Leader>ev :vsp<cr>:e $HOME/.config/nvim/init.vim<CR>
+nnoremap <Leader>sv  :source $HOME/.config/nvim/init.vim<CR>
 "remove highlight in search"
 nnoremap <Leader>nh :nohl<cr>
 "mapping to surround a word with double quotes"
@@ -336,6 +336,26 @@ let g:impact_transbg=1
 nnoremap <Leader>fo zfa{
 "delve go debug"
 let g:delve_backend = "native"
-syntax on
 colorscheme gruvbox
 set background=dark
+" An action can be a reference to a function that processes selected lines
+function! s:build_quickfix_list(lines)
+call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+copen
+cc
+endfunction
+    let g:fzf_action = {
+      \ 'ctrl-q': function('s:build_quickfix_list'),
+      \ 'ctrl-t': 'tab split',
+      \ 'ctrl-x': 'split',
+      \ 'ctrl-v': 'vsplit' }
+"add missing go imports on file save"
+autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
+"add json yaml tags to go structs"
+autocmd FileType go nmap gtj :CocCommand go.tags.add json<cr>
+autocmd FileType go nmap gty :CocCommand go.tags.add yaml<cr>
+autocmd FileType go nmap gtx :CocCommand go.tags.clear<cr>
+"generate unit test file"
+autocmd FileType go nmap gtf :CocCommand go.test.generate.file<cr>
+"generate interface stubs"
+autocmd FileType go nmap gti :CocCommand go.impl.cursor<cr>
