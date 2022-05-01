@@ -1,20 +1,19 @@
 set encoding=utf-8
+set nocompatible
 filetype indent plugin on
 syntax on
-set runtimepath+=$HOME/usr/bin/rg
+set runtimepath+=$HOME/.config/nvim/colors
 set path+=**
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 let g:indentLine_char = '⦙'
 let g:loaded_python_provider = 0
-let g:python3_host_prog = '/usr/bin/python3.9'
-let g:loaded_ruby_provider = 0
+let g:python3_host_prog = '/usr/local/bin/python3'
 set autowrite
 set autoread
 set autoindent
 set textwidth=80
 set undofile
 set undolevels=10000
-set backup
 set smartindent
 set spell
 set smartcase
@@ -39,14 +38,18 @@ set incsearch
 set wildignore=*.o,*.obj,*.bak,*.dmg
 set ignorecase
 set hlsearch
+""set t_Co=256
+"cosmetics"
+""set background=dark
+"if has('termguicolors')
+"set termguicolors
+"endif
 let g:gruvbox_material_background = 'soft'
 set spell
 set directory=$HOME/.config/nvim/swap//
 set undodir=$HOME/.config/nvim/undo//
 set backupdir=$HOME/.config/nvim/backup//
-set writebackup
 set cursorline
-set backupcopy=yes
 set ruler
 set cmdheight=2
 set updatetime=300
@@ -85,7 +88,7 @@ autocmd StdinReadPre * let s:std_in=1
 ""reselect visual block for indent
 vnoremap < <gv
 vnoremap > >gv
-""let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
+let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 let g:indentLine_char = '⦙'
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 autocmd StdinReadPre * let s:std_in=1
@@ -113,12 +116,14 @@ Plug 'junegunn/vim-easy-align'
 Plug 'mrk21/yaml-vim'
 Plug 'morhetz/gruvbox'
 Plug 'joshdick/onedark.vim'
+Plug 'junegunn/fzf'
 Plug 'frazrepo/vim-rainbow'
 Plug 'pedrohdz/vim-yaml-folds'
 Plug 'uarun/vim-protobuf'
 Plug 'Yggdroot/indentLine'
 call plug#end()
 "disable ultisnips"
+let g:UltiSnipsExpandTrigger = "<nop>"
 "lightline buffer plugin"
 let g:lightline = {
       \ 'colorscheme': 'wombat',
@@ -165,16 +170,6 @@ tmap <Esc> <C-\><C-n>
 "au BufNewFile,BufRead *.yaml,*.yml so ~/.vim/yaml.vim
 let g:coc_snippet_next = '<tab>'
 " Mappings using CoCList:
-" using global extensions
- let g:coc_global_extensions = [
- \ 'coc-snippets',
- \ 'coc-prettier',
- \ 'coc-go',
- \ 'coc-markdownlint',
- \'coc-yaml',
- \ ]
-" Add `:Format` command to format current buffer.
-command! -nargs=0 Format :call CocActionAsync('format')
 " Show all diagnostics.
 nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
 " Manage extensions.
@@ -191,11 +186,19 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 """ Resume latest coc list.
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
-  "format mapping
-  nnoremap <space>f :Format<CR>
 """ Use tab for trigger completion with characters ahead and navigate.
 """ NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 """ other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+            \ pumvisible() ? "\<C-n>" :
+            \ <SID>check_back_space() ? "\<TAB>" :
+            \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 "make tab to expand snippets"
 inoremap <silent><expr> <TAB>
              \ pumvisible() ? coc#_select_confirm() :
@@ -232,15 +235,15 @@ let g:fzf_history_dir = '~/.config/nvim/fzf-history'
  endfunction
 augroup mygroup
   autocmd!
-  autocmd CursorHold * silent call CocActionAsync('highlight')
 " Applying codeAction to the selected region.
 " Example: `<leader>aap` for current paragraph
-nmap <leader>a  <Plug>(coc-codeaction-selectted)
+map <leader>a  <Plug>(coc-codeaction-selected)
+" Remap keys for applying codeAction to the current line.
 nmap <leader>ac  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf  <Plug>(coc-fix-current)
   " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json,go setl formatexpr=CocAction('formatSelected')
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
   " Update signature help on jump placeholder.
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
@@ -268,8 +271,8 @@ nnoremap <Leader><c-u> <esc>gUaw
 "mapping to save file "
 nnoremap <Leader>s :wa<cr>
 "edit and source vimrc"
-nnoremap <Leader>ev :vsp<cr>:e $HOME/.config/nvim/init.vim<CR>
-nnoremap <Leader>sv  :source $HOME/.config/nvim/init.vim<CR>
+nnoremap <Leader>ev :vsp<cr>:e ~/dotfiles/init.vim<CR>
+nnoremap <Leader>sv  :source ~/.config/nvim/init.vim<CR>
 "remove highlight in search"
 nnoremap <Leader>nh :nohl<cr>
 "mapping to surround a word with double quotes"
@@ -336,26 +339,6 @@ let g:impact_transbg=1
 nnoremap <Leader>fo zfa{
 "delve go debug"
 let g:delve_backend = "native"
-colorscheme gruvbox
+syntax on
+colorscheme gruvbox-material
 set background=dark
-" An action can be a reference to a function that processes selected lines
-function! s:build_quickfix_list(lines)
-call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
-copen
-cc
-endfunction
-    let g:fzf_action = {
-      \ 'ctrl-q': function('s:build_quickfix_list'),
-      \ 'ctrl-t': 'tab split',
-      \ 'ctrl-x': 'split',
-      \ 'ctrl-v': 'vsplit' }
-"add missing go imports on file save"
-autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
-"add json yaml tags to go structs"
-autocmd FileType go nmap gtj :CocCommand go.tags.add json<cr>
-autocmd FileType go nmap gty :CocCommand go.tags.add yaml<cr>
-autocmd FileType go nmap gtx :CocCommand go.tags.clear<cr>
-"generate unit test file"
-autocmd FileType go nmap gtf :CocCommand go.test.generate.file<cr>
-"generate interface stubs"
-autocmd FileType go nmap gti :CocCommand go.impl.cursor<cr>

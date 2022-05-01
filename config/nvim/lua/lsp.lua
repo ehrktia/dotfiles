@@ -33,9 +33,12 @@ end
 --autocomplete
 local complete = require('complete')
 -- Add additional capabilities supported by nvim-cmp
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+--local capabilities = vim.lsp.protocol.make_client_capabilities()
+--capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
+
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
 --local servers = { 'pyright', 'rust_analyzer', 'tsserver' }
@@ -53,13 +56,33 @@ for _, lsp in pairs(servers) do
     on_attach = on_attach,
     capabilities = capabilities,
     cmd = {"gopls", "serve"},
+    filetypes = {"go","gomod","gotmpl"},
+    root_pattern = {"go.mod",".git"},
+    single_file_support = true,
+    hoverKind = 'Structured',
+    usePlaceholders = true,
+    semanticTokens = true,
     settings = {
       gopls = {
+        experimentalPostfixCompletions = true,
         analyses = {
+          nilness = true,
+          shadow = true,
+          unusedwrite = true,
+          fieldalignment = true,
           unusedparams = true,
         },
         staticcheck = true,
       },
+      gofumpt = true,
+      codelenses = {
+      gc_details=false,
+      generate=true,
+      regenerate_cgo=true,
+      tidy=true,
+      upgrade_dependency=true,
+      vendor=false,
+},
     },
     flags = {
       -- This will be the default in neovim 0.7+
@@ -67,3 +90,32 @@ for _, lsp in pairs(servers) do
     }
   }
 end
+function goimports(timeoutms)
+    local context = { source = { organizeImports = true } }
+    vim.validate { context = { context, "t", true } }
+
+    local params = vim.lsp.util.make_range_params()
+    params.context = context
+
+    -- See the implementation of the textDocument/codeAction callback
+    -- (lua/vim/lsp/handler.lua) for how to do this properly.
+    local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, timeout_ms)
+    if not result or next(result) == nil then return end
+    local actions = result[1].result
+    if not actions then return end
+    local action = actions[1]
+
+    -- textDocument/codeAction can return either Command[] or CodeAction[]. If it
+    -- is a CodeAction, it can have either an edit, a command or both. Edits
+    -- should be executed first.
+    if action.edit or type(action.command) == "table" then
+      if action.edit then
+        vim.lsp.util.apply_workspace_edit(action.edit)
+      end
+      if type(action.command) == "table" then
+        vim.lsp.buf.execute_command(action.command)
+      end
+    else
+      vim.lsp.buf.execute_command(action)
+    end
+  end
