@@ -5,7 +5,7 @@ return require('packer').startup(function()
     use 'sebdah/vim-delve'
     use 'davidosomething/vim-colors-meh'
     use 'sheerun/vim-polyglot'
-    use 'sainnhe/gruvbox-material'
+    use 'wittyjudge/gruvbox-material.nvim'
     use 'itchyny/lightline.vim'
     use 'rust-lang/rust.vim'
     use 'cespare/vim-toml'
@@ -17,13 +17,12 @@ return require('packer').startup(function()
     use 'scrooloose/nerdcommenter'
     use 'junegunn/vim-easy-align'
     use 'mrk21/yaml-vim'
-    use 'morhetz/gruvbox'
     use 'joshdick/onedark.vim'
     use 'frazrepo/vim-rainbow'
     use 'pedrohdz/vim-yaml-folds'
     use 'uarun/vim-protobuf'
     use 'Yggdroot/indentLine'
-    use 'neovim/nvim-lspconfig'
+    use 'neovim/nvim-lspconfig' --inbuilt lsp
     use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
     use 'hrsh7th/cmp-nvim-lsp' -- LSP source for nvim-cmp
     use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp

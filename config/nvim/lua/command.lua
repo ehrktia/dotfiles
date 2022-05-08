@@ -2,13 +2,11 @@ print("loaded command settings successfully")
 vim.cmd[[
 filetype indent plugin on
 syntax on
-colorscheme gruvbox-material
 ]]
 -- global commands 
-vim.g['gruvbox_material_background']='soft'
 vim.g['indentLine_char'] = '⦙'
 vim.g['loaded_python_provider']=0
-vim.g['python3_host_prog']='/usr/local/bin/python3'
+vim.g['python3_host_prog']='/usr/bin/python3'
 vim.g['NERDSpaceDelims']=1
 vim.g['NERDCommentEmptyLines']=1
 vim.g['NERDTrimTrailingWhitespace']=1

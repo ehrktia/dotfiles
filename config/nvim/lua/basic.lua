@@ -5,6 +5,8 @@ local bo = vim.bo
 local set = vim.opt
 local env = vim.env
 local g = vim.g
+--colourscheme
+require('gruvbox-material').setup()
 --global settings
 g.mapleader=','
 env.NVIM_TUI_ENABLE_TRUE_COLOR=1
@@ -48,9 +50,9 @@ set.ruler=true
 set.cmdheight=2
 set.updatetime=300
 set.swapfile=true
-set.directory='/Users/karthickayyapillai/.config/nvim/swap//'
-set.undodir='/Users/karthickayyapillai/.config/nvim/undo//'
-set.backupdir='/Users/karthickayyapillai/.config/nvim/backup//'
+set.directory='$HOME/.config/nvim/swap//'
+set.undodir='$HOME/.config/nvim/undo//'
+set.backupdir='$HOME/.config/nvim/backup//'
 set.signcolumn='yes'
 set.bs='2'
 set.tw=80
