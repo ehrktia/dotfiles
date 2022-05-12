@@ -16,3 +16,16 @@ vim.g['NERDTreeWinSize']=45
 vim.g['gitgutterenable']=1
 vim.g['impact_transbg']=1
 vim.g['delve_backend']='native'
+-- lightline commands for status line
+vim.cmd [[
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'FugitiveHead'
+      \ },
+      \ }
+]]

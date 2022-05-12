@@ -1,7 +1,7 @@
 print("loaded plugins successfully")
 return require('packer').startup(function()
     use 'wbthomason/packer.nvim'
-    use '/usr/local/bin/fzf'
+    --use '/usr/local/bin/fzf'
     use 'sebdah/vim-delve'
     use 'davidosomething/vim-colors-meh'
     use 'sheerun/vim-polyglot'
