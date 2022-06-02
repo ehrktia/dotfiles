@@ -1,0 +1,73 @@
+[user]
+	name = karthick
+    email = a.karthie+gitlab@gmail.com
+	signingkey = 972E7216A7CD5424
+[core]
+	editor = nvim
+    whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
+	excludesFile = ~/.gitignore
+[push]
+	default = current
+[color]
+	ui = auto
+[color "branch"]
+	current = yellow bold
+	local = green bold
+	remote = cyan bold
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+[color "status"]
+	added = green bold
+	changed = yellow bold
+	untracked = red bold
+[diff]
+	tool = nvimdiff
+[difftool]
+	prompt = false
+[gitflow "prefix"]
+	versiontag = v
+[pull]
+	rebase = true
+[page]
+	color = true
+[commit]
+	gpgsign = true
+	template = /home/karthickayyapillai/.gitcommitmsg.txt
+[mergetool "nvim"]
+	cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+[merge]
+	tool = nvim
+[mergetool]
+	prompt = false
+[url "git@gitlab.com:"]
+	insteadOf = https://gitlab.com
+[core]
+    pager = delta
+
+[interactive]
+    diffFilter = delta --color-only --features=interactive
+
+[delta]
+    features = decorations
+
+[delta "interactive"]
+    keep-plus-minus-markers = false
+
+[delta "decorations"]
+    commit-decoration-style = blue ol
+    commit-style = raw
+    file-style = omit
+    hunk-header-decoration-style = blue box
+    hunk-header-file-style = red
+    hunk-header-line-number-style = "#067a00"
+    hunk-header-style = file line-number syntax
+[init]
+	defaultBranch = main
+[delta]
+    side-by-side = true
+[merge]
+    conflictstyle = diff3
