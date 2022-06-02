@@ -18,7 +18,6 @@ set.undofile=true ; bo.undofile=true --persistent undo file
 set.undolevels=10000
 set.smartindent=true
 set.smartcase=true
-set.ignorecase=true
 set.showcmd=true
 set.wildmenu=true
 set.showmatch=true

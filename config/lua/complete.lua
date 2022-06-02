@@ -1,4 +1,4 @@
-
+print("complete load successful")
 -- luasnip setup
 local luasnip = require 'luasnip'
 

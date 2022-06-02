@@ -17,8 +17,6 @@ map('n','<C-J>','<C-W><C-J>',options)
 map('n','<C-K>','<C-W><C-K>',options)
 map('n','<C-L>','<C-W><C-L>',options)
 map('n','<C-H>','<C-W><C-H>',options)
--- tag toggle
-map('n','<F8>',':TagbarToggle',options)
 -- vimrc operations
 map('n','<Leader>sv',':source $HOME/.config/nvim/init.lua<CR>',options)
 -- remap escape key
@@ -31,7 +29,7 @@ map('i','<c-u>','<esc>viwb~ea',options)
 map('n','<c-u>','<esc>viwb~ea',options)
 --captialize entire word
 map('i','Leader<c-u>','<esc>gUawea',options)
-map('n','Leader<c-u>','<esc>gUaw',options)
+map('n','Leader<c-u>','<esc>viaw~',options)
 -- surround word with double quotes and brackets
 map('n','<Leader>"','<esc>viw<esc>a"<esc>bi"<esc>lel',options)
 map('n','<Leader>)','<esc>viw<esc>a)<esc>bi(<esc>lel',options)
@@ -48,7 +46,6 @@ map('n','_','ddkP',options)
 map('n','-','ddp',options)
 map('n','<Leader>gd',':Gdiffsplit',options)
 map('n','<Leader>t',':new term://$TERMINAL',options)
-map('n','<Leader>vt',':vnew term://$TERMINAL',options)
 map('n','<Leader>sa',':wa<CR>',options)
 map('n','<Leader>bl',':ls<CR>',options)
 map('n','<Leader>sp',':sp<CR>',options)

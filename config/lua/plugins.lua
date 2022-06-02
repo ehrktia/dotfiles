@@ -30,4 +30,8 @@ return require('packer').startup(function()
     use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
     use 'L3MON4D3/LuaSnip' -- Snippets plugin
     use 'junegunn/fzf'
+    -- Highlight, edit, and navigate code using a fast incremental parsing library
+    use 'nvim-treesitter/nvim-treesitter'
+    -- Additional textobjects for treesitter
+    use 'nvim-treesitter/nvim-treesitter-textobjects'
 end)
