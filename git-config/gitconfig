@@ -1,4 +1,8 @@
-[includeIf "gitdir:~/"]
+[includeIf "gitdir:~"]
     path= ~/.gitconfig-personal
 [includeIf "gitdir:~/improbable/"]
     path= ~/.gitconfig-work
+[url "ssh://git@github.com-personal/"]
+	insteadOf = https://github.com/ehrktia
+[url "org-32199913@github.com:improbable/"]
+	insteadOf = https://github.com/improbable/
